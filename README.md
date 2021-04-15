@@ -24,33 +24,32 @@ The REST API methods are described down below.
 
 `POST /users`
 
-{"name":"Your name","email":"validemail@email.com","age":"yourAge", "password":"newsecret321"}
-
-### Request
+{
+    "name":"Your name",
+    "email":"validemail@email.com",
+    "age":"yourAge", 
+    "password":"newsecret321"
+}
 
 `POST /users/login`
 
-{"email":"createdEmail@email.com", "password":"createdPassword"}
-
-### Request
+{
+    "email":"createdEmail@email.com", 
+    "password":"createdPassword"
+}
 
 `POST /users/logout`
 
-### Request
-
 `POST /users/logoutAll`
-
-### Request
 
 `POST /tasks`
 
-{"description": "desc", "completed": boolean}
-
-### Request
+{
+    "description": "desc", 
+    "completed": boolean
+}
 
 `GET /users/me`
-
-### Request
 
 `GET /tasks`
 
