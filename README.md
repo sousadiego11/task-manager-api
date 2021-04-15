@@ -22,7 +22,7 @@ The REST API methods are described down below.
 
 ### Request
 
-`POST /users`
+```POST /users
 
 {
     "name":"Your name",
@@ -30,7 +30,7 @@ The REST API methods are described down below.
     "age":"yourAge", 
     "password":"newsecret321"
 }
-
+```
 `POST /users/login`
 
 {
