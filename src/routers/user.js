@@ -98,7 +98,6 @@ router.delete('/users/me', auth, async (req, res) => {
 })
 
 router.post('/users/me/avatar', auth, upload.single('avatar'), async (req, res) => {
-        console.log(req.file)
         const buffer = await sharp(req.file.buffer).resize({ width: 250, height: 250 }).png().toBuffer()
         
         req.user.avatar = buffer
