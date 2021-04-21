@@ -74,8 +74,8 @@ test('Should NOT get profile from unauthenticated user', async () => {
 })
 
 test('Should delete authenticated user', async () => {
-    await request(app).
-        delete('/users/me')
+    await request(app)
+        .delete('/users/me')
         .set('Authorization', `Bearer ${userOne.tokens[0].token}`)
         .send()
         .expect(200)
@@ -85,8 +85,41 @@ test('Should delete authenticated user', async () => {
 })
 
 test('Should NOT delete authenticated user', async () => {
-    await request(app).
-        delete('/users/me')
+    await request(app)
+        .delete('/users/me')
         .send()
         .expect(401)
+})
+
+test('Should upload avatar image', async () => {
+    await request(app)
+        .post('/users/me/avatar')
+        .set('Authorization', `Bearer ${userOne.tokens[0].token}`)
+        .attach('avatar', 'tests/fixtures/profile-pic.jpg')
+        .expect(200)
+    const user = await User.findById(userOneId)
+    expect(user.avatar).toEqual(expect.any(Buffer))
+})
+
+test('Should update valid user fields', async () => {
+    await request(app)
+        .patch('/users/me')
+        .set('Authorization', `Bearer ${userOne.tokens[0].token}`)
+        .send({
+            name: 'Juvenal'
+        })
+        .expect(200)
+
+    const user = await User.findById(userOneId)
+    expect(user.name).toEqual('Juvenal')
+})
+
+test('Should NOT update invalid user fields', async () => {
+    await request(app)
+        .patch('/users/me')
+        .set('Authorization', `Bearer ${userOne.tokens[0].token}`)
+        .send({
+            location: 'Palhoça'
+        })
+        expect(400)
 })
